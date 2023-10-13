@@ -1,4 +1,26 @@
 import matplotlib.pyplot as plt
+import numpy as np
+from comparesignals import SignalSamplesAreEqual
+
+
+signal_type = input("type: ")
+amplitude = int(input("Amplitude: "))
+analog_freq = int(input("Analog Frequency: "))
+sampling_freq = int(input("Sampling Frequency: "))
+phase_shift = float(input("Phase Shift: "))
+duration = 1    # 1 Second
+
+if signal_type == "sin":
+    t = np.linspace(0, duration, int(duration * sampling_freq), endpoint=False)
+    angular_freq = 2 * np.pi * analog_freq
+    wave_form = amplitude * np.sin(angular_freq * t + phase_shift)
+    SignalSamplesAreEqual("SinOutput.txt", 720, wave_form)
+elif signal_type == "cos":
+    t = np.linspace(0, duration, int(duration * sampling_freq), endpoint=False)
+    angular_freq = 2 * np.pi * analog_freq
+    wave_form = amplitude * np.cos(angular_freq * t + phase_shift)
+    SignalSamplesAreEqual("CosOutput.txt", 500, wave_form)
+
 
 file_path = "signal1.txt"
 with open(file_path, 'r') as file:
